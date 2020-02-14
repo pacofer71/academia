@@ -24,14 +24,21 @@ Gestion de Alumnos
         @foreach($alumnos as $alumno)
       <tr class="align-middle">
         <th scope="row" class="align-middle">
-        <a href="{{route('alumnos.show', $alumno)}}" class="btn btn-success fa fa-address-card fa-3x"><i class=""></i></a>
+        <a href="{{route('alumnos.show', $alumno)}}" class="btn btn-success fa fa-address-card fa-2x"><i class=""></i></a>
         </th>
       <td class="align-middle">{{$alumno->apellidos.", ". $alumno->nombre}}</td>
       <td class="align-middle">{{$alumno->mail}}</td>
       <td class="align-middle">
       <img src="{{asset($alumno->logo)}}" width='80px' height='80px' class="img-fluid rounded-circle">
           </td> 
-       <td class="align-center">#</td>   
+       <td class="align-middle" style="white-space: :nowrap">
+          <form class="form-inline" name="del" action="{{route('alumnos.destroy', $alumno)}}" method='POST'>
+            @method("DELETE")
+            @csrf
+            <button type="submit" onclick="return confirm('¿Borrar Alumno?')" class="btn btn-danger fa fa-trash fa-2x"></button>
+            <a href="{{route('alumnos.edit', $alumno)}}" class="ml-2 fa fa-edit fa-2x btn btn-warning"></a>
+          </form>  
+      </td>   
       </tr>
       @endforeach
     </tbody>
